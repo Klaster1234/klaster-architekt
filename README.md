@@ -1,5 +1,7 @@
 # klaster-architekt
 
+![klaster-architekt](obraz/naglowek.png)
+
 Narzędzia do pracy z rzutami i fotografiami budynków: wyciąganie wymiarów z
 rysunków PDF, mierzenie wysokości ze zdjęć, budowa bryły 3D i sterowanie
 FreeCAD-em oraz Blenderem bez klikania.
