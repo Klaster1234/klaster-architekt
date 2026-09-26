@@ -1,0 +1,125 @@
+{
+  "meta": {
+    "wersja_schematu": 1,
+    "projekt": {"id": "przyklad_istn", "obiekt": "Lokal przykładowy (fikcyjny)", "inwestor": "—", "autor": "klaster-architekt", "faza": "STAN ISTNIEJĄCY"},
+    "jednostki": "cm",
+    "wysokosc_kondygnacji": 270,
+    "polnoc": {"azymut_osi_Y_stopnie": 20, "lokalizacja": {"miasto": "Warszawa", "lat": 52.2297, "lon": 21.0122, "strefa": "Europe/Warsaw"}},
+    "zrodla": [
+      {"id": "Z1", "rodzaj": "rzut techniczny (fikcyjny)", "dokladnosc_cm": 1, "wiazace": true},
+      {"id": "Z2", "rodzaj": "skan LiDAR telefonem", "dokladnosc_cm": 5, "wiazace": false}
+    ],
+    "uwagi": ["Przykład fikcyjny: stan istniejący przed zmianami. Plan wyburzeń: rysunki/wyburzenia.py istniejacy.json projekt.json."]
+  },
+  "sciany": [
+    {"id": "S1", "typ": "zewnętrzna", "nosna": true, "pas": [0, 0, 1030, 30], "opis": "ściana zewnętrzna z oknami i wyjściem na balkon"},
+    {"id": "S2", "typ": "od klatki", "nosna": true, "pas": [0, 670, 1030, 700], "opis": "ściana od klatki schodowej z drzwiami wejściowymi"},
+    {"id": "S3", "typ": "zewnętrzna", "nosna": true, "pas": [0, 30, 30, 670]},
+    {"id": "S4", "typ": "międzylokalowa", "nosna": true, "pas": [1000, 30, 1030, 670]},
+    {"id": "S5", "typ": "działowa", "nosna": false, "pas": [30, 420, 520, 430], "opis": "łazienka i hol | sypialnia"},
+    {"id": "S6", "typ": "działowa", "nosna": false, "pas": [250, 430, 260, 670], "opis": "łazienka | hol"},
+    {
+      "id": "S7",
+      "typ": "działowa",
+      "nosna": false,
+      "pas": [520, 30, 530, 670],
+      "zrodlo": "Z2",
+      "dokladnosc_cm": 5,
+      "opis": "sypialnia i hol | pokój dzienny — położenie ze skanu, do sprawdzenia pomiarem"
+    },
+    {"id": "S11", "typ": "działowa", "nosna": false, "pas": [530, 440, 1000, 450], "opis": "kuchnia | pokój"},
+    {"id": "S8", "typ": "balustrada", "nosna": false, "pas": [760, -150, 1000, -140], "wys": [0, 110]},
+    {"id": "S9", "typ": "balustrada", "nosna": false, "pas": [760, -140, 770, 0], "wys": [0, 110]},
+    {"id": "S10", "typ": "balustrada", "nosna": false, "pas": [990, -140, 1000, 0], "wys": [0, 110]}
+  ],
+  "otwory": [
+    {
+      "id": "D1",
+      "rodzaj": "drzwi wejściowe",
+      "sciana": "S2",
+      "zakres": [400, 500],
+      "szer_otw": 100,
+      "wys_otw": 210,
+      "skrzydlo": [90, 200],
+      "do": "P1",
+      "wejscie": true,
+      "zawias": "zachodnia ościeżnica, otwierane do holu",
+      "luk": {"c": [400, 670], "r": 92, "od": 270, "do": 0}
+    },
+    {
+      "id": "D2",
+      "rodzaj": "drzwi",
+      "sciana": "S6",
+      "zakres": [450, 530],
+      "szer_otw": 80,
+      "wys_otw": 205,
+      "skrzydlo": [75, 200],
+      "do": "P2",
+      "zawias": "południowa ościeżnica, otwierane do łazienki",
+      "luk": {"c": [250, 450], "r": 75, "od": 90, "do": 180}
+    },
+    {
+      "id": "D3",
+      "rodzaj": "drzwi",
+      "sciana": "S5",
+      "zakres": [420, 510],
+      "szer_otw": 90,
+      "wys_otw": 205,
+      "skrzydlo": [85, 200],
+      "do": "P4",
+      "zawias": "wschodnia ościeżnica, otwierane do sypialni",
+      "luk": {"c": [510, 420], "r": 85, "od": 180, "do": 270}
+    },
+    {"id": "D4", "rodzaj": "przejście", "sciana": "S7", "zakres": [450, 550], "szer_otw": 100, "wys_otw": 210, "do": "P3"},
+    {
+      "id": "D6",
+      "rodzaj": "drzwi",
+      "sciana": "S11",
+      "zakres": [560, 650],
+      "szer_otw": 90,
+      "wys_otw": 205,
+      "skrzydlo": [85, 200],
+      "do": "P6",
+      "zawias": "zachodnia ościeżnica, otwierane do kuchni",
+      "luk": {"c": [560, 450], "r": 85, "od": 0, "do": 90}
+    },
+    {"id": "O1", "rodzaj": "okno", "sciana": "S1", "zakres": [150, 330], "szer_otw": 180, "wys_otw": 235, "parapet": 85},
+    {"id": "O2", "rodzaj": "okno", "sciana": "S1", "zakres": [600, 760], "szer_otw": 160, "wys_otw": 235, "parapet": 85},
+    {
+      "id": "D5",
+      "rodzaj": "portfenetr",
+      "sciana": "S1",
+      "zakres": [800, 900],
+      "szer_otw": 100,
+      "wys_otw": 235,
+      "parapet": 0,
+      "skrzydlo": [90, 225],
+      "do": "P5",
+      "zawias": "zachodnia ościeżnica, otwierane do pokoju",
+      "luk": {"c": [800, 30], "r": 90, "od": 0, "do": 90}
+    }
+  ],
+  "szachty": [
+    {"id": "SZ1", "box": [30, 630, 70, 670], "wymiar": "40/40", "opis": "pion kanalizacji i wody dla łazienki"},
+    {"id": "SZ2", "box": [960, 630, 1000, 670], "wymiar": "40/40", "opis": "pion kanalizacji, wody i wentylacji aneksu"}
+  ],
+  "grzejniki": [
+    {"id": "G1", "pomieszczenie": "P4", "box": [170, 32, 310, 42], "typ": "płytowy", "wys": [15, 75]},
+    {"id": "G2", "pomieszczenie": "P3", "box": [610, 32, 750, 42], "typ": "płytowy", "wys": [15, 75]},
+    {"id": "G3", "pomieszczenie": "P2", "box": [272, 540, 280, 620], "typ": "drabinkowy", "wys": [20, 140]}
+  ],
+  "strefy_wirtualne": [],
+  "kontekst": [
+    {"id": "X1", "rodzaj": "klatka schodowa", "box": [0, 700, 1030, 900], "wys": [0, 270]},
+    {"id": "X2", "rodzaj": "budynek sąsiedni", "box": [-400, -1400, 300, -900], "wys": [0, 1800]}
+  ],
+  "pomieszczenia": [
+    {"nr": "P1", "nazwa": "hol", "stamp": [400, 550], "pow_m2": 6.24, "podloga": "gres"},
+    {"nr": "P2", "nazwa": "łazienka", "stamp": [155, 480], "pow_m2": 5.12, "podloga": "gres"},
+    {"nr": "P3", "nazwa": "pokój", "stamp": [760, 300], "pow_m2": 19.27, "podloga": "panele"},
+    {"nr": "P6", "nazwa": "kuchnia", "stamp": [760, 560], "pow_m2": 10.18, "podloga": "gres"},
+    {"nr": "P4", "nazwa": "sypialnia", "stamp": [250, 200], "pow_m2": 19.11, "podloga": "panele"},
+    {"nr": "P5", "nazwa": "balkon", "stamp": [880, -70], "pow_m2": 3.08, "zewnetrzne": true, "podloga": "płyty tarasowe"}
+  ],
+  "aranzacja": {}
+}

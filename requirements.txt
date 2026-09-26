@@ -1,0 +1,10 @@
+pymupdf
+numpy
+opencv-python
+scipy
+pillow
+ezdxf
+shapely>=2.1
+trimesh
+tzdata
+certifi

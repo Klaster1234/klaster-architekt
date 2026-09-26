@@ -3,3 +3,8 @@ __pycache__/
 robocze/
 *.blend1
 *.FCStd1
+wyjscie/
+node_modules/
+*.bak
+.DS_Store
+projekty/

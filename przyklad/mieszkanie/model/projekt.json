@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "rodzaj": "wnetrze",
+    "projekt": {"id": "mieszkanie", "obiekt": "Mieszkanie przykładowe (fikcyjne)", "inwestor": "—", "autor": "klaster-architekt", "faza": "PROJEKT ROBOCZY"},
+    "polnoc": {"azymut_osi_Y_stopnie": 20},
+    "lokalizacja": {"miasto": "Warszawa", "lat": 52.2297, "lon": 21.0122, "strefa": "Europe/Warsaw"}
+  },
+  "poziomy": [{"id": "L3", "nazwa": "3. piętro", "z": 900}],
+  "moduly": [{"id": "M1", "rodzaj": "wnetrze", "plik": "lokal_projekt.json", "poziom": "L3", "przesuniecie": [0, 0], "obrot_stopnie": 0}]
+}

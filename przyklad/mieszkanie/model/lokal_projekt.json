@@ -1,0 +1,355 @@
+{
+  "meta": {
+    "wersja_schematu": 1,
+    "projekt": {"id": "przyklad", "obiekt": "Lokal przykładowy (fikcyjny)", "inwestor": "—", "autor": "klaster-architekt", "faza": "WSTĘPNA"},
+    "jednostki": "cm",
+    "wysokosc_kondygnacji": 270,
+    "rzedna_sufitu": {"wartosc": 250, "status": "ZAŁOŻENIE — do pomiaru"},
+    "polnoc": {"azymut_osi_Y_stopnie": 20, "lokalizacja": {"miasto": "Warszawa", "lat": 52.2297, "lon": 21.0122, "strefa": "Europe/Warsaw"}},
+    "zrodla": [
+      {"id": "Z1", "rodzaj": "rzut techniczny (fikcyjny)", "dokladnosc_cm": 1, "wiazace": true},
+      {"id": "Z2", "rodzaj": "skan LiDAR telefonem", "dokladnosc_cm": 5, "wiazace": false}
+    ],
+    "uwagi": ["Przykład fikcyjny do nauki narzędzi. Wszystkie wymiary w centymetrach, wysokości od podłogi wykończonej."]
+  },
+  "sciany": [
+    {"id": "S1", "typ": "zewnętrzna", "nosna": true, "pas": [0, 0, 1030, 30], "opis": "ściana zewnętrzna z oknami i wyjściem na balkon"},
+    {"id": "S2", "typ": "od klatki", "nosna": true, "pas": [0, 670, 1030, 700], "opis": "ściana od klatki schodowej z drzwiami wejściowymi"},
+    {"id": "S3", "typ": "zewnętrzna", "nosna": true, "pas": [0, 30, 30, 670]},
+    {"id": "S4", "typ": "międzylokalowa", "nosna": true, "pas": [1000, 30, 1030, 670]},
+    {"id": "S5", "typ": "działowa", "nosna": false, "pas": [30, 420, 520, 430], "opis": "łazienka i hol | sypialnia"},
+    {
+      "id": "S6",
+      "typ": "działowa",
+      "nosna": false,
+      "pas": [280, 430, 290, 670],
+      "opis": "łazienka | hol (nowa, przesunięta względem stanu istniejącego)"
+    },
+    {
+      "id": "S7",
+      "typ": "działowa",
+      "nosna": false,
+      "pas": [520, 30, 530, 670],
+      "zrodlo": "Z2",
+      "dokladnosc_cm": 5,
+      "opis": "sypialnia i hol | pokój dzienny — położenie ze skanu, do sprawdzenia pomiarem"
+    },
+    {"id": "S8", "typ": "balustrada", "nosna": false, "pas": [760, -150, 1000, -140], "wys": [0, 110]},
+    {"id": "S9", "typ": "balustrada", "nosna": false, "pas": [760, -140, 770, 0], "wys": [0, 110]},
+    {"id": "S10", "typ": "balustrada", "nosna": false, "pas": [990, -140, 1000, 0], "wys": [0, 110]}
+  ],
+  "otwory": [
+    {
+      "id": "D1",
+      "rodzaj": "drzwi wejściowe",
+      "sciana": "S2",
+      "zakres": [400, 500],
+      "szer_otw": 100,
+      "wys_otw": 210,
+      "skrzydlo": [90, 200],
+      "do": "P1",
+      "wejscie": true,
+      "zawias": "zachodnia ościeżnica, otwierane do holu",
+      "luk": {"c": [400, 670], "r": 92, "od": 270, "do": 0}
+    },
+    {
+      "id": "D2",
+      "rodzaj": "drzwi",
+      "sciana": "S6",
+      "zakres": [450, 530],
+      "szer_otw": 80,
+      "wys_otw": 205,
+      "skrzydlo": [75, 200],
+      "do": "P2",
+      "zawias": "południowa ościeżnica, otwierane do łazienki",
+      "luk": {"c": [280, 450], "r": 75, "od": 90, "do": 180}
+    },
+    {
+      "id": "D3",
+      "rodzaj": "drzwi",
+      "sciana": "S5",
+      "zakres": [420, 510],
+      "szer_otw": 90,
+      "wys_otw": 205,
+      "skrzydlo": [85, 200],
+      "do": "P4",
+      "zawias": "wschodnia ościeżnica, otwierane do sypialni",
+      "luk": {"c": [510, 420], "r": 85, "od": 180, "do": 270}
+    },
+    {"id": "D4", "rodzaj": "przejście", "sciana": "S7", "zakres": [450, 550], "szer_otw": 100, "wys_otw": 210, "do": "P3"},
+    {"id": "O1", "rodzaj": "okno", "sciana": "S1", "zakres": [150, 330], "szer_otw": 180, "wys_otw": 235, "parapet": 85},
+    {"id": "O2", "rodzaj": "okno", "sciana": "S1", "zakres": [600, 760], "szer_otw": 160, "wys_otw": 235, "parapet": 85},
+    {
+      "id": "D5",
+      "rodzaj": "portfenetr",
+      "sciana": "S1",
+      "zakres": [800, 900],
+      "szer_otw": 100,
+      "wys_otw": 235,
+      "parapet": 0,
+      "skrzydlo": [90, 225],
+      "do": "P5",
+      "zawias": "zachodnia ościeżnica, otwierane do pokoju",
+      "luk": {"c": [800, 30], "r": 90, "od": 0, "do": 90}
+    }
+  ],
+  "szachty": [
+    {"id": "SZ1", "box": [30, 630, 70, 670], "wymiar": "40/40", "opis": "pion kanalizacji i wody dla łazienki"},
+    {"id": "SZ2", "box": [960, 630, 1000, 670], "wymiar": "40/40", "opis": "pion kanalizacji, wody i wentylacji aneksu"}
+  ],
+  "grzejniki": [
+    {"id": "G1", "pomieszczenie": "P4", "box": [170, 32, 310, 42], "typ": "płytowy", "wys": [15, 75]},
+    {"id": "G2", "pomieszczenie": "P3", "box": [610, 32, 750, 42], "typ": "płytowy", "wys": [15, 75]},
+    {"id": "G3", "pomieszczenie": "P2", "box": [272, 540, 280, 620], "typ": "drabinkowy", "wys": [20, 140]}
+  ],
+  "strefy_wirtualne": [],
+  "pomieszczenia": [
+    {"nr": "P1", "nazwa": "hol", "stamp": [400, 550], "pow_m2": 5.52, "podloga": "gres"},
+    {"nr": "P2", "nazwa": "łazienka", "stamp": [155, 480], "pow_m2": 5.84, "podloga": "gres"},
+    {"nr": "P3", "nazwa": "pokój dzienny z aneksem", "stamp": [760, 300], "pow_m2": 29.92, "podloga": "panele"},
+    {"nr": "P4", "nazwa": "sypialnia", "stamp": [250, 200], "pow_m2": 19.1, "podloga": "panele"},
+    {"nr": "P5", "nazwa": "balkon", "stamp": [880, -70], "pow_m2": 3.08, "zewnetrzne": true, "podloga": "płyty tarasowe"}
+  ],
+  "kontekst": [
+    {"id": "X1", "rodzaj": "klatka schodowa", "box": [0, 700, 1030, 900], "wys": [0, 270]},
+    {"id": "X2", "rodzaj": "budynek sąsiedni", "box": [-400, -1400, 300, -900], "wys": [0, 1800]}
+  ],
+  "zmiany": [
+    {"id": "Z1", "rodzaj": "wyburzenie", "xy": [765, 445], "opis": "rozbiórka ściany między kuchnią a pokojem — aneks otwarty"},
+    {"id": "Z2", "rodzaj": "przesunięcie ściany", "xy": [270, 600], "opis": "ściana łazienki przesunięta o 30 cm w stronę holu"}
+  ],
+  "aranzacja": {
+    "P1": {
+      "status": "zatwierdzony",
+      "elementy": [
+        {
+          "id": "H1",
+          "rodzaj": "szafa w zabudowie",
+          "box": [290, 560, 350, 670],
+          "wys": [0, 250],
+          "front": "E",
+          "do_sufitu": true,
+          "segmenty": [{"dl": 55, "opis": "wieszaki"}, {"dl": 55, "opis": "półki i buty"}],
+          "wys_zrodlo": "użytkownik"
+        }
+      ],
+      "kontrole": ["szafa nie wchodzi w pole otwierania drzwi wejściowych"]
+    },
+    "P2": {
+      "status": "zatwierdzony",
+      "elementy": [
+        {
+          "id": "L1",
+          "rodzaj": "prysznic",
+          "box": [30, 430, 130, 530],
+          "wys": [0, 200],
+          "wys_zrodlo": "użytkownik",
+          "opis": "prysznic walk-in 100×100 z odpływem liniowym"
+        },
+        {
+          "id": "L3",
+          "rodzaj": "szafka z umywalką",
+          "box": [30, 540, 80, 620],
+          "wys": [40, 90],
+          "front": "E",
+          "wys_zrodlo": "ZAŁOŻENIE — typowy blat umywalki 90"
+        },
+        {"id": "L2", "rodzaj": "toaleta", "box": [80, 610, 120, 670], "wys": [0, 40], "front": "S", "wys_zrodlo": "produkt"},
+        {"id": "L4", "rodzaj": "pralka", "box": [150, 610, 210, 670], "wys": [0, 85], "front": "S", "wys_zrodlo": "produkt"}
+      ]
+    },
+    "P3": {
+      "status": "zatwierdzony",
+      "elementy": [
+        {
+          "id": "K2",
+          "rodzaj": "słupek lodówki",
+          "box": [540, 610, 600, 670],
+          "wys": [0, 250],
+          "front": "S",
+          "do_sufitu": true,
+          "wys_zrodlo": "użytkownik"
+        },
+        {
+          "id": "K1",
+          "rodzaj": "ciąg kuchenny",
+          "box": [600, 610, 960, 670],
+          "wys": [0, 90],
+          "front": "S",
+          "wys_zrodlo": "użytkownik: blat 90",
+          "segmenty": [
+            {"dl": 60, "opis": "zlew"},
+            {"dl": 60, "opis": "zmywarka"},
+            {"dl": 60, "opis": "szuflady"},
+            {"dl": 60, "opis": "płyta i piekarnik"},
+            {"dl": 60, "opis": "szuflady"},
+            {"dl": 60, "opis": "cargo"}
+          ]
+        },
+        {
+          "id": "K3",
+          "rodzaj": "szafka wisząca",
+          "box": [600, 635, 960, 670],
+          "wys": [145, 220],
+          "front": "S",
+          "wys_zrodlo": "użytkownik",
+          "segmenty": [
+            {"dl": 60, "opis": "okap w szafce"},
+            {"dl": 60, "opis": "półki"},
+            {"dl": 60, "opis": "półki"},
+            {"dl": 60, "opis": "okap"},
+            {"dl": 60, "opis": "półki"},
+            {"dl": 60, "opis": "półki"}
+          ]
+        },
+        {"id": "N1", "rodzaj": "stół", "box": [620, 380, 760, 470], "wys": [0, 75], "wys_zrodlo": "produkt"},
+        {"id": "N2", "rodzaj": "krzesło", "box": [640, 330, 685, 375], "wys": [0, 85], "front": "N", "mobilne": true, "wys_zrodlo": "produkt"},
+        {"id": "N3", "rodzaj": "krzesło", "box": [695, 330, 740, 375], "wys": [0, 85], "front": "N", "mobilne": true, "wys_zrodlo": "produkt"},
+        {"id": "N4", "rodzaj": "krzesło", "box": [640, 475, 685, 520], "wys": [0, 85], "front": "S", "mobilne": true, "wys_zrodlo": "produkt"},
+        {"id": "N5", "rodzaj": "krzesło", "box": [695, 475, 740, 520], "wys": [0, 85], "front": "S", "mobilne": true, "wys_zrodlo": "produkt"},
+        {"id": "N6", "rodzaj": "sofa", "box": [910, 90, 1000, 310], "wys": [0, 85], "front": "W", "wys_zrodlo": "produkt"},
+        {"id": "N7", "rodzaj": "szafka RTV", "box": [530, 120, 575, 300], "wys": [0, 50], "front": "E", "wys_zrodlo": "użytkownik"},
+        {"id": "N8", "rodzaj": "stolik kawowy", "box": [760, 150, 850, 240], "wys": [0, 40], "mobilne": true, "wys_zrodlo": "produkt"}
+      ],
+      "wymiary_kontrolne": [{"od": [710, 520], "do": [710, 610], "opis": "krzesła ↔ front zabudowy"}],
+      "kontrole": ["przejście między krzesłami a zabudową kuchenną co najmniej 90 cm"]
+    },
+    "P4": {
+      "status": "zatwierdzony",
+      "elementy": [
+        {
+          "id": "B1",
+          "rodzaj": "łóżko",
+          "box": [180, 220, 340, 420],
+          "wys": [0, 45],
+          "front": "S",
+          "wys_zrodlo": "produkt",
+          "opis": "łóżko 160×200 wezgłowiem do ściany S5"
+        },
+        {"id": "B2", "rodzaj": "szafka nocna", "box": [130, 380, 175, 420], "wys": [0, 55], "wys_zrodlo": "ZAŁOŻENIE — wysokość materaca + 10"},
+        {"id": "B3", "rodzaj": "szafka nocna", "box": [345, 380, 390, 420], "wys": [0, 55], "wys_zrodlo": "ZAŁOŻENIE — wysokość materaca + 10"},
+        {
+          "id": "B4",
+          "rodzaj": "szafa",
+          "box": [460, 60, 520, 330],
+          "wys": [0, 250],
+          "front": "W",
+          "do_sufitu": true,
+          "wys_zrodlo": "użytkownik",
+          "segmenty": [{"dl": 90, "opis": "drążek"}, {"dl": 90, "opis": "półki"}, {"dl": 90, "opis": "drążek"}]
+        }
+      ]
+    }
+  },
+  "elektryka": [
+    {"id": "E1", "pomieszczenie": "P1", "typ": "rozdzielnica", "xy": [520, 620], "h": 150, "opis": "rozdzielnica mieszkaniowa w ścianie holu"},
+    {
+      "id": "E2",
+      "pomieszczenie": "P1",
+      "typ": "łącznik",
+      "xy": [515, 670],
+      "h": 110,
+      "obwod": "oświetlenie",
+      "opis": "światło w holu, przy drzwiach wejściowych od strony klamki"
+    },
+    {
+      "id": "E3",
+      "pomieszczenie": "P2",
+      "typ": "łącznik",
+      "xy": [290, 545],
+      "h": 110,
+      "obwod": "oświetlenie",
+      "wyjatek": "łącznik światła łazienki montowany w holu przy drzwiach",
+      "opis": "światło w łazience"
+    },
+    {"id": "E4", "pomieszczenie": "P1", "typ": "punkt świetlny", "xy": [405, 550], "h": 250, "obwod": "oświetlenie"},
+    {"id": "E5", "pomieszczenie": "P1", "typ": "gniazdo", "xy": [350, 430], "h": 30, "obwod": "gniazda"},
+    {"id": "E6", "pomieszczenie": "P2", "typ": "punkt świetlny", "xy": [155, 550], "h": 250, "obwod": "oświetlenie", "ip": 44},
+    {"id": "E7", "pomieszczenie": "P2", "typ": "gniazdo", "xy": [30, 600], "h": 110, "ip": 44, "obwod": "łazienka", "opis": "przy umywalce"},
+    {"id": "E8", "pomieszczenie": "P2", "typ": "gniazdo", "xy": [180, 670], "h": 110, "ip": 44, "wariant": "pralka", "obwod": "pralka"},
+    {"id": "E9", "pomieszczenie": "P2", "typ": "kinkiet", "xy": [30, 580], "h": 190, "ip": 44, "obwod": "oświetlenie", "opis": "nad lustrem"},
+    {
+      "id": "E10",
+      "pomieszczenie": "P3",
+      "typ": "łącznik",
+      "xy": [530, 565],
+      "h": 110,
+      "obwod": "oświetlenie",
+      "krotnosc": 2,
+      "opis": "zwis nad stołem i oświetlenie ogólne"
+    },
+    {"id": "E11", "pomieszczenie": "P3", "typ": "punkt świetlny", "xy": [690, 425], "h": 250, "wariant": "zwis", "obwod": "oświetlenie"},
+    {"id": "E12", "pomieszczenie": "P3", "typ": "punkt świetlny", "xy": [800, 200], "h": 250, "obwod": "oświetlenie"},
+    {"id": "E13", "pomieszczenie": "P3", "typ": "wypust", "xy": [780, 670], "h": 145, "wariant": "LED pod szafkami", "obwod": "oświetlenie"},
+    {"id": "E14", "pomieszczenie": "P3", "typ": "gniazdo", "xy": [700, 670], "h": 120, "krotnosc": 2, "wariant": "nadblatowe", "obwod": "kuchnia"},
+    {"id": "E15", "pomieszczenie": "P3", "typ": "gniazdo", "xy": [870, 670], "h": 120, "krotnosc": 2, "wariant": "nadblatowe", "obwod": "kuchnia"},
+    {"id": "E16", "pomieszczenie": "P3", "typ": "gniazdo", "xy": [570, 670], "h": 30, "wariant": "AGD", "obwod": "lodówka"},
+    {"id": "E17", "pomieszczenie": "P3", "typ": "gniazdo", "xy": [675, 670], "h": 30, "wariant": "AGD", "obwod": "zmywarka"},
+    {"id": "E18", "pomieszczenie": "P3", "typ": "zasilanie", "xy": [810, 670], "h": 30, "wariant": "3F płyta indukcyjna", "obwod": "płyta"},
+    {"id": "E19", "pomieszczenie": "P3", "typ": "gniazdo", "xy": [530, 210], "h": 30, "krotnosc": 2, "obwod": "gniazda", "opis": "za szafką RTV"},
+    {"id": "E20", "pomieszczenie": "P3", "typ": "gniazdo", "xy": [1000, 320], "h": 30, "obwod": "gniazda", "opis": "przy sofie"},
+    {"id": "E21", "pomieszczenie": "P3", "typ": "zasilanie", "xy": [530, 425], "h": 240, "wariant": "klimatyzacja", "obwod": "klimatyzacja"},
+    {"id": "E22", "pomieszczenie": "P4", "typ": "łącznik", "xy": [405, 420], "h": 110, "obwod": "oświetlenie"},
+    {"id": "E23", "pomieszczenie": "P4", "typ": "punkt świetlny", "xy": [275, 225], "h": 250, "obwod": "oświetlenie"},
+    {"id": "E24", "pomieszczenie": "P4", "typ": "kinkiet", "xy": [155, 420], "h": 150, "obwod": "oświetlenie"},
+    {"id": "E25", "pomieszczenie": "P4", "typ": "kinkiet", "xy": [365, 420], "h": 150, "obwod": "oświetlenie"},
+    {"id": "E26", "pomieszczenie": "P4", "typ": "gniazdo", "xy": [145, 420], "h": 30, "obwod": "gniazda"},
+    {"id": "E27", "pomieszczenie": "P4", "typ": "gniazdo", "xy": [375, 420], "h": 30, "obwod": "gniazda"},
+    {"id": "E28", "pomieszczenie": "P5", "typ": "gniazdo", "xy": [930, 0], "h": 30, "ip": 44, "obwod": "zewnętrzne"},
+    {"id": "E29", "pomieszczenie": "P5", "typ": "kinkiet", "xy": [780, 0], "h": 200, "ip": 44, "obwod": "oświetlenie"}
+  ],
+  "wod_kan": {
+    "punkty": [
+      {"id": "WK1", "medium": "kanalizacja", "typ": "zlew — odpływ", "pomieszczenie": "P3", "xy": [630, 665], "h": 50},
+      {"id": "WK2", "medium": "woda zimna", "typ": "zlew — bateria", "pomieszczenie": "P3", "xy": [620, 665], "h": 55},
+      {"id": "WK3", "medium": "woda ciepła", "typ": "zlew — bateria", "pomieszczenie": "P3", "xy": [640, 665], "h": 55},
+      {
+        "id": "WK4",
+        "medium": "woda zimna",
+        "typ": "zmywarka — zawór",
+        "pomieszczenie": "P3",
+        "xy": [690, 665],
+        "h": 40,
+        "opis": "odpływ zmywarki do syfonu zlewu"
+      },
+      {"id": "WK5", "medium": "kanalizacja", "typ": "odpływ liniowy", "pomieszczenie": "P2", "linia": [[40, 440], [120, 440]], "h": 0},
+      {"id": "WK6", "medium": "woda zimna", "typ": "prysznic — bateria", "pomieszczenie": "P2", "xy": [30, 470], "h": 110},
+      {"id": "WK7", "medium": "woda ciepła", "typ": "prysznic — bateria", "pomieszczenie": "P2", "xy": [30, 490], "h": 110},
+      {"id": "WK8", "medium": "kanalizacja", "typ": "toaleta", "pomieszczenie": "P2", "xy": [100, 665], "h": 20},
+      {"id": "WK9", "medium": "woda zimna", "typ": "toaleta", "pomieszczenie": "P2", "xy": [112, 670], "h": 20},
+      {"id": "WK10", "medium": "kanalizacja", "typ": "umywalka", "pomieszczenie": "P2", "xy": [30, 580], "h": 55},
+      {"id": "WK11", "medium": "woda zimna", "typ": "umywalka", "pomieszczenie": "P2", "xy": [30, 570], "h": 60},
+      {"id": "WK12", "medium": "woda ciepła", "typ": "umywalka", "pomieszczenie": "P2", "xy": [30, 590], "h": 60},
+      {"id": "WK13", "medium": "woda zimna", "typ": "pralka — zawór", "pomieszczenie": "P2", "xy": [165, 670], "h": 70},
+      {"id": "WK14", "medium": "kanalizacja", "typ": "pralka — syfon", "pomieszczenie": "P2", "xy": [195, 670], "h": 60}
+    ],
+    "trasy": [
+      {"id": "TR1", "od": "WK1", "polilinia": [[630, 665], [960, 665]], "opis": "Ø50 w cokole zabudowy do pionu SZ2"},
+      {"id": "TR2", "od": "WK8", "polilinia": [[100, 665], [70, 665]], "opis": "Ø110 do pionu SZ1"},
+      {"id": "TR3", "od": "WK5", "polilinia": [[40, 440], [40, 625]], "opis": "Ø50 ze spadkiem 2% pod szafką umywalkową"},
+      {"id": "TR4", "od": "WK14", "polilinia": [[195, 665], [70, 665]], "opis": "Ø50 do pionu SZ1"}
+    ]
+  },
+  "klimatyzacja": {
+    "jednostki": [
+      {"id": "AC1", "pomieszczenie": "P3", "box": [530, 380, 550, 470], "wys": [220, 250], "opis": "jednostka ścienna"},
+      {"id": "AC2", "pomieszczenie": "P5", "box": [940, -130, 990, -60], "wys": [0, 60], "opis": "jednostka zewnętrzna"}
+    ],
+    "trasy": [{"id": "TK1", "od": "AC1", "polilinia": [[540, 425], [540, 40], [905, 40]], "opis": "rury chłodnicze i skropliny pod sufitem"}],
+    "przekucia": [{"id": "PK1", "xy": [905, 15], "sciana": "S1", "opis": "przekucie do jednostki zewnętrznej na balkonie"}]
+  },
+  "sufity": {
+    "strefy": [
+      {"pomieszczenie": "P1", "h": 250, "plyta": "GKB 12,5"},
+      {"pomieszczenie": "P2", "h": 250, "plyta": "GK impregnowana 12,5"},
+      {"pomieszczenie": "P3", "h": 250, "plyta": "GKB 12,5"},
+      {"pomieszczenie": "P4", "h": 250, "plyta": "GKB 12,5"}
+    ],
+    "klapy": [{"id": "KR1", "xy": [90, 600], "wymiar": [30, 30], "cel": "dostęp do pionu i zaworów"}],
+    "kratki": [{"id": "KW1", "xy": [50, 625]}, {"id": "KW2", "xy": [980, 625]}]
+  },
+  "klady": [
+    {"id": "K-01", "pomieszczenie": "P3", "sciana": "S2", "tytul": "Aneks kuchenny — ściana z zabudową"},
+    {"id": "K-02", "pomieszczenie": "P4", "sciana": "S5", "tytul": "Sypialnia — ściana wezgłowia"}
+  ]
+}
