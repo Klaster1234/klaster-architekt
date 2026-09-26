@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "Tylko typ modułów: Node czyta kontrole.js jako ES module (sprawdzanie funkcji bez przeglądarki). Planer nie ma zależności — three.js ładuje się z CDN."
+}

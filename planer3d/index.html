@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planer 3D</title>
+<link rel="icon" href="data:,">
+<style>
+  :root {
+    --tlo: #F4EFE8; --karta: #FBF8F3; --tekst: #3D342C; --cichy: #85776B; --linia: #E4DACE;
+    --akcent: #B8742C; --roz: #C2185B; --zolty: #EFC26C; --noc: #2F3544;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { display: grid; grid-template-rows: auto 1fr; background: var(--tlo); color: var(--tekst); font: 13px/1.45 -apple-system, "Segoe UI", system-ui, sans-serif; overflow: hidden; }
+  button, input, select { font: inherit; color: var(--tekst); }
+  button { background: #fff; border: 1px solid #DDD2C6; border-radius: 8px; padding: 4px 9px; cursor: pointer; white-space: nowrap; }
+  button:hover:not(:disabled) { border-color: var(--akcent); }
+  button:disabled { opacity: .45; cursor: default; }
+  button.wl { background: #F6E3C4; border-color: var(--akcent); }
+  .cichy { color: var(--cichy); }
+  kbd { font: 11px ui-monospace, monospace; background: #fff; border: 1px solid #DDD2C6; border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; }
+
+  header { display: flex; align-items: center; gap: 14px; padding: 8px 12px; background: var(--karta); border-bottom: 1px solid var(--linia); flex-wrap: wrap; }
+  .marka { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+  .marka b { font-size: 14px; }
+  .marka span { font-size: 11px; color: var(--cichy); }
+  #pokoje { display: flex; gap: 4px; flex-wrap: wrap; flex: 1; }
+  #pokoje button { border-radius: 999px; font-size: 12px; padding: 3px 10px; }
+  .akcje { display: flex; gap: 6px; }
+
+  main { display: grid; grid-template-columns: minmax(300px, 32%) 1fr 310px; min-height: 0; position: relative; }
+  #lewy { display: flex; flex-direction: column; min-height: 0; border-right: 1px solid var(--linia); background: var(--karta); position: relative; }
+  .naglowek { display: flex; align-items: baseline; gap: 8px; padding: 8px 12px 4px; flex-wrap: wrap; }
+  .naglowek b { font-size: 13px; }
+  .naglowek small { color: var(--cichy); font-size: 11px; }
+  #rzut { flex: 1; width: 100%; min-height: 0; touch-action: none; cursor: default; display: block; }
+  #polnoc-rzutu { position: absolute; right: 8px; bottom: 8px; width: 56px; height: 56px; pointer-events: none; }
+  #polnoc-rzutu circle { fill: rgba(251, 248, 243, .9); stroke: #C9BBAA; stroke-width: 1; }
+  #polnoc-rzutu path { fill: #8C2F39; }
+  #polnoc-rzutu text { font-size: 10px; font-weight: 700; fill: #8C2F39; text-anchor: middle; dominant-baseline: central; }
+  #scena { position: relative; min-height: 0; overflow: hidden; background: var(--tlo); }
+  #scena canvas { display: block; }
+  #prawy { overflow-y: auto; background: var(--karta); border-left: 1px solid var(--linia); padding: 4px 14px 16px; }
+  #prawy section { padding: 10px 0; border-bottom: 1px solid var(--linia); }
+  #prawy h3 { margin: 0 0 6px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--cichy); font-weight: 600; }
+  #prawy h3 .licznik { background: var(--roz); color: #fff; border-radius: 999px; padding: 0 6px; margin-left: 4px; letter-spacing: 0; }
+  #pokoj-nazwa { font-size: 15px; font-weight: 600; }
+  .tytul-el { font-size: 14px; }
+  .tytul-el b { color: var(--roz); }
+  .przyciski, .wiersz { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
+  .zmiana { color: #2F6FB0; margin-top: 4px; }
+  .probka-el { display: inline-block; width: 10px; height: 10px; border-radius: 3px; border: 1px solid rgba(0, 0, 0, .2); margin-right: 5px; vertical-align: -1px; }
+  details { margin-top: 8px; }
+  summary { cursor: pointer; color: var(--cichy); }
+  details p, details li { font-size: 12px; }
+  ul.uwagi, ul.projektowe, #uklady { list-style: none; margin: 4px 0 0; padding: 0; }
+  ul.uwagi li { padding: 5px 8px; border-radius: 8px; margin-bottom: 4px; background: #EEF5E9; }
+  ul.uwagi li.kolizja { background: #FBE3E1; }
+  ul.uwagi li.uwaga { background: #FBF0DC; }
+  ul.projektowe li { padding: 3px 0 3px 12px; border-left: 2px solid var(--linia); margin-bottom: 4px; color: var(--cichy); }
+  #uklady li { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+  #uklady li button:first-child { flex: 1; text-align: left; overflow: hidden; text-overflow: ellipsis; }
+  #uklady .x { padding: 2px 7px; }
+  input[type=text], input[type=date], select { border: 1px solid #DDD2C6; border-radius: 8px; padding: 4px 8px; background: #fff; min-width: 0; }
+  #nazwa-ukladu { flex: 1; }
+  .maly { font-size: 11.5px; margin: 0 0 6px; }
+  .dzwignia { display: grid; gap: 2px; margin-top: 7px; font-size: 12px; }
+  .dzwignia > span:first-child { color: var(--cichy); }
+  .dzwignia .wybor { display: flex; gap: 6px; align-items: center; }
+  .dzwignia select { flex: 1; width: 100%; }
+  .dzwignia .probka { width: 18px; height: 18px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, .15); flex: none; }
+  .dzwignia.zmieniona select { border-color: #2F6FB0; background: #EEF3FA; }
+
+  /* zegar */
+  #tarcza { display: block; width: 190px; margin: 0 auto; touch-action: none; cursor: grab; outline: none; }
+  #tarcza .noc { fill: none; stroke: var(--noc); stroke-width: 13; }
+  #tarcza:focus-visible .noc { stroke: #56607A; }
+  #tarcza .dzien { fill: none; stroke: var(--zolty); stroke-width: 13; }
+  #tarcza .kreska { stroke: #A89A8C; stroke-width: 1; }
+  #tarcza .godz { font-size: 10px; fill: var(--cichy); text-anchor: middle; dominant-baseline: central; }
+  #tarcza .czas { font-size: 28px; font-weight: 600; fill: var(--tekst); text-anchor: middle; dominant-baseline: central; font-variant-numeric: tabular-nums; }
+  #tarcza .data { font-size: 10.5px; fill: var(--cichy); text-anchor: middle; dominant-baseline: central; }
+  #tarcza .slonce { fill: #FFC445; stroke: #fff; stroke-width: 2.5; }
+  #tarcza .slonce.pod { fill: #8D93A3; }
+  #dzien { flex: 1; }
+  .chip { font-size: 11.5px; padding: 2px 8px; border-radius: 999px; }
+  #opis-slonca { margin-top: 8px; color: var(--cichy); font-size: 12px; }
+  #opis-slonca b { color: var(--tekst); }
+
+  /* rzut */
+  #rzut .sasiad { fill: #ECE7E0; }
+  #rzut .pokoj { fill: #F5EDE1; }
+  #rzut .pokoj.gres { fill: #ECE8E2; }
+  #rzut .pokoj.zewnetrzne { fill: #E4E6E6; }
+  #rzut .pokoj.aktywny { fill: #FAEFD9; }
+  #rzut .podpis { font-size: calc(var(--u) * 10px); fill: #A39486; text-anchor: middle; pointer-events: none; }
+  #rzut .podpis .nazwa { font-weight: 600; fill: #85776B; text-transform: uppercase; letter-spacing: .05em; }
+  #rzut .sciana { fill: #A39C94; }
+  #rzut .sciana.nosna { fill: #57514B; }
+  #rzut .sciana.niska { fill: #C8C2BA; }
+  #rzut .otwor { fill: var(--karta); }
+  #rzut .szyba { stroke: #7FA9C0; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+  #rzut .skrzydlo { stroke: #6B5D52; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+  #rzut .luk { fill: none; stroke: #A0948A; stroke-width: 1; stroke-dasharray: 4 3; vector-effect: non-scaling-stroke; }
+  #rzut .szacht { fill: url(#kreski); stroke: #9C8F80; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  #rzut .grzejnik { fill: #E07B5F; }
+  #rzut .duch { fill: none; stroke: #8A7F75; stroke-width: 1.2; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+  #rzut .mebel { cursor: grab; }
+  #rzut .mebel .bryla { fill-opacity: .8; stroke: #6B5D52; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  #rzut .mebel.wiszacy .bryla { fill-opacity: 0; stroke-dasharray: 5 3; }
+  #rzut .mebel.zmieniony .bryla { stroke: #2F6FB0; stroke-width: 1.8; }
+  #rzut .mebel.kolizja .bryla { fill: #E57373; fill-opacity: .85; }
+  #rzut .mebel.wybrany .bryla { stroke: var(--roz); stroke-width: 2.6; fill-opacity: .95; }
+  #rzut .podzial { fill: none; stroke: #6B5D52; stroke-width: 0.8; opacity: .75; vector-effect: non-scaling-stroke; pointer-events: none; }
+  #rzut .etykieta { font-size: calc(var(--u) * 10px); fill: #2E2620; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  #rzut .wymiar { stroke: var(--roz); stroke-width: 1.3; vector-effect: non-scaling-stroke; }
+  #rzut .wymiar-tlo { fill: var(--roz); }
+  #rzut .wymiar-tekst { font-size: calc(var(--u) * 10.5px); fill: #fff; font-weight: 600; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  #rzut.ciagniecie, #rzut.ciagniecie .mebel { cursor: grabbing; }
+
+  /* 3D: pasek kamery, etykiety róży, podpowiedzi */
+  .etykiety { position: absolute; inset: 0; pointer-events: none; }
+  .strona { font-size: 10.5px; letter-spacing: .12em; font-weight: 600; color: #6B5D52; background: rgba(251, 248, 243, .85); padding: 1px 6px; border-radius: 4px; }
+  .strona.n { color: #8C2F39; }
+  #pasek3d { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; gap: 8px; flex-wrap: wrap; z-index: 2; pointer-events: none; }
+  .grupa { display: flex; background: rgba(251, 248, 243, .92); border-radius: 10px; padding: 3px; gap: 2px; box-shadow: 0 2px 10px rgba(40, 30, 20, .1); pointer-events: auto; }
+  .grupa button { border: none; background: transparent; border-radius: 7px; font-size: 12px; }
+  .grupa button.wl { background: var(--tekst); color: #fff; }
+  body:not(.spacer) .tylko-spacer, body.spacer .tylko-orbita { display: none; }
+  #podpowiedz { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(40, 34, 30, .78); color: #fff; font-size: 12px; padding: 5px 12px; border-radius: 8px; z-index: 2; white-space: nowrap; }
+  body:not(.spacer) #podpowiedz { display: none; }
+  #podpowiedz kbd { color: var(--tekst); }
+  #komunikat { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--cichy); text-align: center; max-width: 80%; white-space: pre-line; }
+  #toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--tekst); color: #fff; padding: 8px 14px; border-radius: 10px; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 10; }
+  #toast.widoczny { opacity: 1; }
+
+  #pokaz-rzut { display: none; }
+  @media (max-width: 1150px) {
+    main { grid-template-columns: 1fr 290px; }
+    #lewy { position: absolute; left: 0; top: 0; bottom: 0; width: min(440px, 58vw); z-index: 5; box-shadow: 6px 0 20px rgba(40, 30, 20, .15); }
+    body:not(.rzut-otwarty) #lewy { display: none; }
+    #pokaz-rzut { display: inline-block; }
+  }
+  @media (max-width: 760px) {
+    body { overflow: auto; }
+    main { grid-template-columns: 1fr; grid-template-rows: 60vh auto; }
+    #lewy { width: 100%; }
+  }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<header>
+  <div class="marka"><b id="nazwa-projektu">Planer 3D</b><span id="podtytul">wczytywanie modelu…</span></div>
+  <nav id="pokoje" aria-label="Pomieszczenia"></nav>
+  <div class="akcje">
+    <button id="pokaz-rzut" title="Pokaż albo ukryj rzut">rzut</button>
+    <button id="cofnij" title="Cofnij (Ctrl+Z / ⌘Z)" disabled>↶ cofnij</button>
+    <button id="projekt" title="Wszystkie meble z powrotem jak w modelu" disabled>przywróć projekt</button>
+  </div>
+</header>
+<main>
+  <section id="lewy">
+    <div class="naglowek"><b>Rzut</b><small>przeciągnij mebel · <kbd>R</kbd> obrót · strzałki 1 cm, z Shift 10 cm · kółko zoom · dwuklik dopasowuje</small></div>
+    <svg id="rzut" aria-label="Rzut lokalu"></svg>
+    <svg id="polnoc-rzutu" viewBox="-30 -30 60 60" aria-label="Kierunek północy na rzucie"><circle r="15"/><g id="strzalka-polnocy"><path d="M0 -14 L5.5 9 L0 5 L-5.5 9 Z"/><text y="-19">N</text></g></svg>
+  </section>
+  <section id="scena">
+    <div id="pasek3d">
+      <div class="grupa"><button data-widok="orbita" class="wl">z zewnątrz</button><button data-widok="spacer">spacer</button></div>
+      <div class="grupa tylko-orbita"><button data-ujecie="skos">skos</button><button data-ujecie="gora">z góry</button></div>
+      <div class="grupa tylko-spacer"><button data-start="drzwi">od wejścia</button><button data-start="okno">od okna</button></div>
+      <div class="grupa tylko-spacer"><button data-wzrost="1.6" class="wl">dorosły</button><button data-wzrost="1.15">siedząc</button><button data-wzrost="1.05">dziecko</button></div>
+      <div class="grupa"><button id="kadr" title="Pobiera bieżący widok 3D jako PNG: kadr_&lt;pomieszczenie&gt;_&lt;data i godzina z zegara słońca&gt;.png">Zapisz kadr PNG</button></div>
+    </div>
+    <div id="podpowiedz"><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> / strzałki — chodzenie · przeciągnij — rozglądanie · Shift — szybciej · Esc — wyjście</div>
+    <div id="komunikat">wczytywanie modelu…</div>
+  </section>
+  <aside id="prawy">
+    <section>
+      <div id="pokoj-nazwa"></div>
+      <div id="pokoj-opis" class="cichy"></div>
+    </section>
+    <section>
+      <h3>Wybrany element</h3>
+      <div id="wybrany"></div>
+    </section>
+    <section>
+      <h3>Kontrole <span id="licznik-kontroli"></span></h3>
+      <div id="kontrole"></div>
+    </section>
+    <section>
+      <h3>Słońce i światło</h3>
+      <svg id="tarcza" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="1439" aria-label="Godzina — przeciągnij słońce po tarczy (strzałki: 5 min, z Shift: 1 h)"></svg>
+      <div class="wiersz">
+        <button class="chip" data-pora="rano">rano</button><button class="chip" data-pora="poludnie">południe</button>
+        <button class="chip" data-pora="popoludnie">popołudnie</button><button class="chip" data-pora="wieczor">wieczór</button>
+      </div>
+      <div class="wiersz">
+        <input type="date" id="dzien" aria-label="Data">
+        <button id="graj" title="Odtwarzaj dzień od wschodu do zachodu">▶</button>
+        <button id="teraz" title="Bieżąca data i godzina w strefie lokalu">teraz</button>
+      </div>
+      <div class="wiersz">
+        <button class="chip" data-md="12-21">21.12 zima</button><button class="chip" data-md="03-20">20.03 równonoc</button><button class="chip" data-md="06-21">21.06 lato</button>
+      </div>
+      <div class="wiersz">
+        <label for="sztuczne" class="cichy">światło sztuczne</label>
+        <select id="sztuczne"><option value="auto">auto (po zmroku)</option><option value="wl">włączone</option><option value="wyl">wyłączone</option></select>
+      </div>
+      <div id="opis-slonca"></div>
+    </section>
+    <section>
+      <h3>Warianty wykończenia</h3>
+      <p class="cichy maly">Z modelu (wykończenie → warianty). ● = opcja domyślna z modelu. Wybór tutaj to podgląd — decyzję wpisuje się do modelu.</p>
+      <div id="dzwignie"></div>
+      <div class="wiersz"><button id="dzwignie-domyslne" title="Wróć do opcji domyślnych z modelu">domyślne z modelu</button></div>
+    </section>
+    <section>
+      <h3>Moje warianty układu</h3>
+      <div class="wiersz"><input type="text" id="nazwa-ukladu" placeholder="np. sofa pod oknem"><button id="zapisz-uklad">zapisz</button></div>
+      <ul id="uklady"></ul>
+      <div class="wiersz"><button id="eksport" title="Kopiuje przestawienia i wybrane warianty jako JSON — wklej w rozmowie z Claude, żeby nanieść je na model">kopiuj zmiany dla Claude</button></div>
+    </section>
+  </aside>
+</main>
+<div id="toast" role="status"></div>
+<script type="module" src="./app.js"></script>
+</body>
+</html>

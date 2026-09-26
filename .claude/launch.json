@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "planer3d-ogrod",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["planer3d/serwer.py", "przyklad/ogrod/model/projekt.json", "przyklad/ogrod/model/koncepcja_A.json", "przyklad/ogrod/model/koncepcja_B.json"],
+      "port": 8055
+    },
+    {
+      "name": "planer3d-ogrod-windows",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["planer3d/serwer.py", "przyklad/ogrod/model/projekt.json", "przyklad/ogrod/model/koncepcja_A.json", "przyklad/ogrod/model/koncepcja_B.json"],
+      "port": 8055
+    },
+    {
+      "name": "planer3d-mieszkanie",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["planer3d/serwer.py", "przyklad/mieszkanie/model/lokal_projekt.json", "--port", "8056"],
+      "port": 8056
+    },
+    {
+      "name": "planer3d-mieszkanie-windows",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["planer3d/serwer.py", "przyklad/mieszkanie/model/lokal_projekt.json", "--port", "8056"],
+      "port": 8056
+    }
+  ]
+}
