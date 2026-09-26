@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "rodzaj": "ogrod",
+    "projekt": {
+      "id": "koncepcja_b",
+      "obiekt": "Ogród przykładowy (fikcyjny) — koncepcja B: rekreacyjna",
+      "inwestor": "—",
+      "autor": "klaster-architekt",
+      "faza": "KONCEPCJA"
+    },
+    "polnoc": {"azymut_osi_Y_stopnie": 10},
+    "lokalizacja": {"lat": 52.1, "lon": 19.5, "strefa": "Europe/Warsaw"}
+  },
+  "miejsce": {
+    "dzialki": [{"id": "DZ1", "granica": [[0, 0], [2500, 0], [2500, 3200], [0, 3150]]}],
+    "teren": {
+      "punkty": [
+        [0, 0, 40],
+        [500, 0, 46],
+        [1000, 0, 44],
+        [1500, 0, 37],
+        [2000, 0, 34],
+        [2500, 0, 40],
+        [0, 400, 21],
+        [500, 400, 27],
+        [1000, 400, 25],
+        [1500, 400, 18],
+        [2000, 400, 15],
+        [2500, 400, 21],
+        [0, 800, 2],
+        [500, 800, 8],
+        [1000, 800, 6],
+        [1500, 800, -1],
+        [2000, 800, -3],
+        [2500, 800, 2],
+        [0, 1200, -16],
+        [500, 1200, -11],
+        [1000, 1200, -13],
+        [1500, 1200, -20],
+        [2000, 1200, -22],
+        [2500, 1200, -16],
+        [0, 1600, -35],
+        [500, 1600, -29],
+        [1000, 1600, -31],
+        [1500, 1600, -38],
+        [2000, 1600, -41],
+        [2500, 1600, -35],
+        [0, 2000, -54],
+        [500, 2000, -48],
+        [1000, 2000, -50],
+        [1500, 2000, -57],
+        [2000, 2000, -60],
+        [2500, 2000, -54],
+        [0, 2400, -72],
+        [500, 2400, -67],
+        [1000, 2400, -69],
+        [1500, 2400, -76],
+        [2000, 2400, -78],
+        [2500, 2400, -73],
+        [0, 2800, -91],
+        [500, 2800, -86],
+        [1000, 2800, -88],
+        [1500, 2800, -95],
+        [2000, 2800, -97],
+        [2500, 2800, -91],
+        [0, 3200, -110],
+        [500, 3200, -104],
+        [1000, 3200, -106],
+        [1500, 3200, -113],
+        [2000, 3200, -116],
+        [2500, 3200, -110]
+      ],
+      "zrodlo": "pomiar (fikcyjny)",
+      "dokladnosc_cm": 5
+    },
+    "sasiedztwo": [
+      {
+        "id": "SB1",
+        "rodzaj": "budynek",
+        "obrys": [[2700, 1600], [3500, 1600], [3500, 2600], [2700, 2600]],
+        "wys": 750,
+        "zrodlo": "szacunek (fikcyjny)",
+        "dokladnosc_cm": 50
+      },
+      {
+        "id": "SB2",
+        "rodzaj": "budynek",
+        "obrys": [[-900, 400], [-200, 400], [-200, 1400], [-900, 1400]],
+        "wys": 600,
+        "zrodlo": "szacunek (fikcyjny)",
+        "dokladnosc_cm": 50
+      }
+    ],
+    "plan_miejscowy": {
+      "nazwa": "plan fikcyjny (przykład)",
+      "symbol": "MN",
+      "przeznaczenie": "zabudowa mieszkaniowa jednorodzinna",
+      "parametry": {"pbc_min_proc": 50, "zabudowa_max_proc": 30, "wys_max": 900}
+    },
+    "uwarunkowania": [
+      "Usunięcie drzew: przed wycinką sprawdzić w gminie, czy wymaga zgłoszenia albo zezwolenia (zależy m.in. od obwodu pnia i celu usunięcia).",
+      "Ogrodzenie: wysokość i forma zgodne z planem miejscowym; brama i furtka nie mogą otwierać się na zewnątrz działki.",
+      "Wody opadowe: zagospodarować na własnej działce, bez odprowadzania na działki sąsiednie."
+    ]
+  },
+  "poziomy": [{"id": "P0", "nazwa": "parter", "z": 0}],
+  "legenda": {
+    "budynek": {
+      "nazwa": "budynek",
+      "ksztalt": "bryla",
+      "plan": {"wypelnienie": "#BDBDBD", "kreskowanie": "ukos", "linia": "#222222", "grubosc": 1.4},
+      "bryla": {"kolor": "#D9D9D9"},
+      "bilans": "zabudowa"
+    },
+    "dach": {"nazwa": "dach", "ksztalt": "dach", "plan": {"wypelnienie": null, "linia": "#555555"}, "bryla": {"kolor": "#8C8C8C"}},
+    "taras": {
+      "nazwa": "taras",
+      "ksztalt": "bryla",
+      "plan": {"wypelnienie": "#E6E6E6", "kreskowanie": "poziome"},
+      "bryla": {"kolor": "#BFBFBF"},
+      "bilans": "utwardzona"
+    },
+    "nawierzchnia": {"nazwa": "nawierzchnia", "ksztalt": "powierzchnia", "plan": {"wypelnienie": "#D6D6D6"}, "bryla": {"kolor": "#B0B0B0"}, "bilans": "utwardzona"},
+    "trawnik": {
+      "nazwa": "trawnik",
+      "ksztalt": "powierzchnia",
+      "plan": {"wypelnienie": "#8FA27F", "linia": "#8FA27F"},
+      "bryla": {"kolor": "#8FA27F"},
+      "bilans": "pbc"
+    },
+    "rabata": {
+      "nazwa": "rabata bylinowa",
+      "ksztalt": "powierzchnia",
+      "plan": {"wypelnienie": "#8FA27F", "kreskowanie": "kropki"},
+      "bryla": {"kolor": "#8FA27F"},
+      "zestawienie": ["gatunek", "rozstaw_cm"],
+      "bilans": "pbc"
+    },
+    "krzewy": {
+      "nazwa": "grupa krzewów",
+      "ksztalt": "powierzchnia",
+      "plan": {"wypelnienie": "#8FA27F", "kreskowanie": "krzyz"},
+      "bryla": {"kolor": "#8FA27F"},
+      "zestawienie": ["gatunek", "rozstaw_cm"],
+      "bilans": "pbc"
+    },
+    "drzewo": {
+      "nazwa": "drzewo",
+      "ksztalt": "punkt",
+      "plan": {"symbol": "drzewo"},
+      "bryla": {"kolor": "#8FA27F"},
+      "zestawienie": ["gatunek", "obwod_cm", "wielkosc"]
+    },
+    "zywoplot": {
+      "nazwa": "żywopłot",
+      "ksztalt": "linia",
+      "plan": {"linia": "#8FA27F", "grubosc": 4},
+      "bryla": {"kolor": "#8FA27F"},
+      "zestawienie": ["gatunek", "rozstaw_cm"]
+    },
+    "ogrodzenie": {"nazwa": "ogrodzenie", "ksztalt": "linia", "plan": {"linia": "#444444", "grubosc": 1.2}, "bryla": {"kolor": "#9E9E9E"}},
+    "woda": {
+      "nazwa": "oczko wodne",
+      "ksztalt": "powierzchnia",
+      "plan": {"wypelnienie": "#B7C4CC", "linia": "#5D7A88"},
+      "bryla": {"kolor": "#8CA3AD"},
+      "bilans": "woda"
+    }
+  },
+  "obiekty": [
+    {
+      "id": "DOM",
+      "kategoria": "budynek",
+      "ksztalt": {"wielokat": [[700, 1500], [1700, 1500], [1700, 2700], [700, 2700]]},
+      "poziom": "P0",
+      "z": [-90, 300]
+    },
+    {
+      "id": "DACH",
+      "kategoria": "dach",
+      "ksztalt": {"wielokat": [[700, 1500], [1700, 1500], [1700, 2700], [700, 2700]]},
+      "poziom": "P0",
+      "dach": {"typ": "dwuspadowy", "kat": 40, "z0": 300, "okap": 50}
+    },
+    {
+      "id": "D1",
+      "kategoria": "drzewo",
+      "ksztalt": {"punkt": [250, 2950]},
+      "na_terenie": true,
+      "wys": 1600,
+      "srednica": 900,
+      "atrybuty": {"gatunek": "lipa drobnolistna", "obwod_cm": 180}
+    },
+    {
+      "id": "D2",
+      "kategoria": "drzewo",
+      "ksztalt": {"punkt": [2250, 2950]},
+      "na_terenie": true,
+      "wys": 1400,
+      "srednica": 800,
+      "atrybuty": {"gatunek": "klon zwyczajny", "obwod_cm": 150}
+    },
+    {
+      "id": "D4",
+      "kategoria": "drzewo",
+      "ksztalt": {"punkt": [400, 800]},
+      "na_terenie": true,
+      "wys": 1400,
+      "srednica": 600,
+      "atrybuty": {"gatunek": "sosna zwyczajna", "obwod_cm": 120}
+    },
+    {"id": "OG1", "kategoria": "ogrodzenie", "ksztalt": {"linia": [[0, 3150], [0, 0]]}, "na_terenie": true, "wys": 150},
+    {"id": "OG2", "kategoria": "ogrodzenie", "ksztalt": {"linia": [[0, 0], [1150, 0]]}, "na_terenie": true, "wys": 150},
+    {"id": "OG3", "kategoria": "ogrodzenie", "ksztalt": {"linia": [[1250, 0], [2500, 0], [2500, 3200]]}, "na_terenie": true, "wys": 150},
+    {
+      "id": "TA2",
+      "kategoria": "taras",
+      "ksztalt": {"wielokat": [[700, 1000], [1900, 1000], [1900, 1500], [700, 1500]]},
+      "poziom": "P0",
+      "z": [-20, 0]
+    },
+    {"id": "SC2", "kategoria": "nawierzchnia", "ksztalt": {"wielokat": [[1140, 0], [1260, 0], [1260, 1000], [1140, 1000]]}, "na_terenie": true},
+    {"id": "OW1", "kategoria": "woda", "ksztalt": {"wielokat": [[2100, 1700], [2500, 1700], [2500, 2100], [2100, 2100]]}, "na_terenie": true},
+    {
+      "id": "TR2",
+      "kategoria": "trawnik",
+      "ksztalt": {
+        "wielokat": [
+          [2500, 0],
+          [1260, 0],
+          [1260, 1000],
+          [1900, 1000],
+          [1900, 1500],
+          [1700, 1500],
+          [1700, 2700],
+          [700, 2700],
+          [700, 1500],
+          [700, 1000],
+          [1140, 1000],
+          [1140, 0],
+          [0, 0],
+          [0, 3100],
+          [2500, 3100],
+          [2500, 2100],
+          [2100, 2100],
+          [2100, 1700],
+          [2500, 1700]
+        ]
+      },
+      "na_terenie": true
+    }
+  ]
+}
