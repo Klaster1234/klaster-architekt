@@ -1,6 +1,7 @@
 <#
 Instaluje Blender i FreeCAD, wgrywa wtyczki MCP, ustawia automatyczny start
-serwerow i rejestruje oba konektory w Claude Code.
+serwerow i rejestruje oba konektory w Claude Code. Doinstalowuje biblioteki
+Pythona z requirements.txt.
 
     powershell -ExecutionPolicy Bypass -File instalacja\instaluj.ps1
 
@@ -52,5 +53,19 @@ Krok "Konektory w Claude Code"
 claude mcp add blender -s user -- uvx blender-mcp
 claude mcp add freecad -s user -- uvx freecad-mcp
 
+Krok "Biblioteki Pythona dla narzedzi"
+# "py" (launcher, instalowany przez python.org) sprawdzany pierwszy: "python" w PATH bywa
+# aliasem Microsoft Store, ktory nie instaluje niczego i tylko otwiera Store
+$python = Get-Command py -ErrorAction SilentlyContinue
+if (-not $python) { $python = Get-Command python -ErrorAction SilentlyContinue }
+if ($python) {
+    & $python.Source -m pip install -r "$repo\requirements.txt"
+    if ($LASTEXITCODE -ne 0) { Write-Host "pip zglosil blad, doinstaluj recznie: python -m pip install -r requirements.txt" -ForegroundColor Yellow }
+} else {
+    Write-Host "Nie znalazlem Pythona; zainstaluj go i uruchom: python -m pip install -r requirements.txt" -ForegroundColor Yellow
+}
+
+Write-Host "`nDWG: pobierz darmowy ODA File Converter ze strony opendesign.com; narzedzia\dwg_do_dxf.py znajdzie go sam" -ForegroundColor Cyan
+Write-Host "albo przez zmienna ODA_CONVERTER." -ForegroundColor Cyan
 Write-Host "`nGotowe. Blender port 9876, FreeCAD port 9875." -ForegroundColor Green
 Write-Host "Blendera odpalaj przez 'Blender z MCP.bat'. Sesje Claude Code zrestartuj." -ForegroundColor Green
